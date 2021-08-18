@@ -1,5 +1,7 @@
 from django.db import models
 
+#Choice and QUestion objects create a Python database-acess API
+
 #modes.___ -> type of data each field holds 
 class Question(models.Model):
     #variables name will be used as the database column's name
