@@ -5,7 +5,7 @@ from django.db import models
 #modes.___ -> type of data each field holds 
 class Question(models.Model):
     #variables name will be used as the database column's name
-    question_text = models.CharField(max_lenght = 200)
+    question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
 class Choice(models.Model):
