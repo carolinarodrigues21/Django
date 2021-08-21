@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, Http404
 from django.template import loader
 
@@ -13,11 +13,15 @@ def index(request):
     #render(request object, template name, dictionary (optional))
 
 def detail(request, question_id):
-    try:
-        return HttpResponse("You're looking at question %s." % question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+    question = get_object_or_404(Question, pk=question_id)
     return render(request, 'pools/detail.htm', {'question': question})
+
+    #another way to do this is:
+    #try:
+    #    return HttpResponse("You're looking at question %s." % question_id)
+    #except Question.DoesNotExist:
+    #    raise Http404("Question does not exist")
+    #return render(request, 'pools/detail.htm', {'question': question})
 
 def results(request,question_id):
     response = "You're looking at the results of the questions %s."
