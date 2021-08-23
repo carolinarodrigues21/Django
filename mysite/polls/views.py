@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.template import loader
+#from django.template import loader
 
 from .models import Choice, Question 
 
@@ -24,10 +24,6 @@ def detail(request, question_id):
     #    raise Http404("Question does not exist")
     #return render(request, 'pools/detail.htm', {'question': question})
 
-def results(request,question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question': question})
-
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -38,4 +34,8 @@ def vote(request, question_id):
     else: 
         selected_choice.votes +=1 
         selected_choice.save()
-    return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def results(request,question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question})
